@@ -54,8 +54,6 @@ npm install
 ---------
 ![build-test](https://raw.githubusercontent.com/zy445566/rust-bindings-learn/master/imgs/build-test.png)
 ------------------
-### 目录结构
-
 
 ### 开始写我们的斐波那契数吧
 打开native目录里的src中的lib.rs文件,修改为
