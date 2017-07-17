@@ -55,43 +55,60 @@ use neon::js::JsString;
 use neon::js::JsInteger;
 use neon::js::Variant;
 
+//原有的hello方法
 fn hello(call: Call) -> JsResult<JsString> {
     let scope = call.scope;
     Ok(JsString::new(scope, "hello node").unwrap())
 }
+
+//斐波那契数方法入口
 fn fib(call: Call) -> JsResult<JsInteger> {
     let scope = call.scope;
+    //获取第一个参数
     let option_num = call.arguments.get(scope,0);
+    //定义参数值变量
     let mut num:i32 = 0;
+    //获取参数值
     if let Some(x1) = option_num {
         if let Variant::Integer(x2) = x1.variant() {
             num = x2.value() as i32;
         }
     }
-    Ok(JsInteger::new(scope, my_fib(num)))
+    //调用简单的求斐波那契数方法，并返回js的Integer对象
+    Ok(JsInteger::new(scope, easy_fib(num)))
 }
 
-fn my_fib(num:i32) -> i32
+// 简单的求斐波那契数方法，有兴趣的同学可以实现一下矩阵快速幂求斐波那契数
+fn easy_fib(num:i32) -> i32
 {
     if num < 2
     {
         return 1;
     } else {
-        return my_fib(num-1) + my_fib(num-2);
+        return easy_fib(num-1) + easy_fib(num-2);
     }
 }
 
+//模块导出
 register_module!(m, {
     try!(m.export("hello", hello));
     try!(m.export("fib", fib));
     Ok(())
 });
+
 ```
 ### 接下来是lib的index.js文件修改为
 ```node
 var addon = require('../native');
-
 console.log(addon.hello());
 console.log(addon.fib(30));
 ```
+
+### 编译并运行
+```sh
+cnpm install #或neon build
+node .\lib\index.js
+```
+
+### 看到下图，你就已经成功了，现在你可以用rust做node扩展了
 
