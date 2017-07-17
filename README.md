@@ -34,13 +34,26 @@ npm install -g neon-cli
 ### 正式开始建立项目
 * 运行命令建立项目，那我们来一发求斐波那契数吧
 * 先建立项目，同时看是否之前的环境是否搭建有误
-``` sh
+首先运行
+```sh
 neon new fib
+```
+------------------------
+![neon_new_fib](https://raw.githubusercontent.com/zy445566/rust-bindings-learn/master/imgs/neon_new_fib.png)
+---------------------------------
+我们先看一下目录结构
+-------------
+![dir-stcut](https://raw.githubusercontent.com/zy445566/rust-bindings-learn/master/imgs/dir-stcut.png)
+------------------
+接下来，切换到生成的目录，安装依赖并编译
+``` sh
 cd fib
 npm install
 ```
 如果出现以下情况则安装正确(如图)：
-
+---------
+![build-test](https://raw.githubusercontent.com/zy445566/rust-bindings-learn/master/imgs/build-test.png)
+------------------
 ### 目录结构
 
 
@@ -111,4 +124,6 @@ node .\lib\index.js
 ```
 
 ### 看到下图，你就已经成功了，现在你可以用rust做node扩展了
+-----------------
 
+![fib-test](https://raw.githubusercontent.com/zy445566/rust-bindings-learn/master/imgs/fib-test.png)
